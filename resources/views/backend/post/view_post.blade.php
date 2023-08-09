@@ -5,7 +5,7 @@
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3>Category List</h3>
+							<h3>Post List</h3>
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -23,21 +23,23 @@
                                                 <th>Title</th>
                                                 <th>Sub Title</th>
                                                 <th>Slug</th>
+                                                <th>Content</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 											
-											@foreach($category as $key => $categories)
+											@foreach($post as $key => $posts)
                                             <tr>
                                                 <td>{{$key+1}}</td>
-                                                <td>{{$categories->user->name}}</td>
-                                                <td>{{$categories->title}}</td>
-                                                <td>{{$categories->subTitle}}</td>
-                                                <td>{{$categories->slug}}</td>
+                                                <td>{{$posts->user->name}}</td>
+                                                <td>{{$posts->title}}</td>
+                                                <td>{{$posts->subTitle}}</td>
+                                                <td>{{$posts->slug}}</td>
+                                                <td>{{$posts->content}}</td>
                                                 <td>
-                                                    <a href="{{route('category.edit',$categories->id)}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
-                                                    <a href="{{route('category.destroy',$categories->id)}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this data?')"><i class="fa fa-trash"></i></a>
+                                                    <a href="{{route('post.edit',$posts->id)}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
+                                                    <a href="{{route('post.destroy',$posts->id)}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this data?')"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
 											

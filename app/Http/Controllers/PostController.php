@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CategoryController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::with('user')->latest()->get();
-       return view('backend.category.view_category',['category'=>$category]);
+        $post = Post::latest()->get();
+        return view('backend.post.view_post',['post'=>$post]);
     }
 
     /**
@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('backend.category.add_category');
+        return view('backend.post.add_post');
     }
 
     /**
@@ -38,22 +38,22 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-       
-         $request->validate([
-            'title'=>['required','string','max:255'],
-            'subTitle'=>['required','string','max:255']
+            $request->validate([
+                'title'=>['required','string','max:255'],
+                'subTitle'=>['required','string','max:255'],
+                'content'=>['required'],
+            ]);
+
+            Post::create([
+            'title'=>$request->title,
+            'subTitle'=>$request->subTitle,
+            'content'=>$request->content,
+            'slug'=>Str::Slug($request->title),
+            'user_id'=>Auth::user()->id
         ]);
+        
 
-        Category::create([
-        'title'=>$request->title,
-        'subTitle'=>$request->subTitle,
-        'slug'=>Str::Slug($request->title),
-        'created_by'=>Auth::user()->id
-       ]);
-      
-
-        return redirect()->back()->with('success','Category has been created!!');
-
+         return redirect()->back()->with('success','Post has been created!!');
     }
 
     /**
@@ -64,7 +64,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-       //
+        //
     }
 
     /**
@@ -75,10 +75,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        
-        $category = Category::find($id);
-
-        return view('backend.category.edit_category',compact('category'));
+        //
     }
 
     /**
@@ -90,22 +87,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
-
-        $request->validate([
-            'title'=>['required','string','max:255'],
-            'subTitle'=>['required','string','max:255']
-        ]);
-
-        
-        $category->update([
-        'title'=>$request->title,
-        'subTitle'=>$request->subTitle,
-        'slug'=>Str::Slug($request->title),
-        'updated_by'=>Auth::user()->id
-       ]);
-
-        return redirect()->back()->with('success','Category has been updated!!');
+        //
     }
 
     /**
@@ -116,9 +98,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
-
-        $category->delete();
-        return redirect()->back()->with('success','Category has been Deleted!!');
+        //
     }
 }

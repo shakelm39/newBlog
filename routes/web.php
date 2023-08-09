@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 
 // Route::get('/dashboard', function () {
@@ -27,12 +28,23 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-//Category Controller
+// --------------------------------Category Controller ----------------------------------------------------//
 
  Route::group(['prefix'=>'category'], function(){
-    Route::get('/viewCategory',[CategoryController::class,'index'])->name('category.view');
-    Route::get('/addCategory',[CategoryController::class,'create'])->name('category.create');
-    Route::post('/store',[CategoryController::class,'store'])->name('category.store');
-    Route::get('/edit/{id}',[CategoryController::class,'edit'])->name('category.edit');
-    Route::post('/update/{id}',[CategoryController::class,'update'])->name('category.update');
+    Route::get('/viewCategory',     [CategoryController::class,'index'])->name('category.view');
+    Route::get('/addCategory',      [CategoryController::class,'create'])->name('category.create');
+    Route::post('/store',           [CategoryController::class,'store'])->name('category.store');
+    Route::get('/edit/{id}',        [CategoryController::class,'edit'])->name('category.edit');
+    Route::post('/update/{id}',     [CategoryController::class,'update'])->name('category.update');
+    Route::get('/delete/{id}',      [CategoryController::class,'destroy'])->name('category.destroy');
+ });
+
+ // --------------------------------Post Controller ----------------------------------------------------//
+ Route::group(['prefix'=>'post'], function(){
+    Route::get('/viewPost',         [PostController::class,'index'])->name('post.view');
+    Route::get('/addPost',          [PostController::class,'create'])->name('post.create');
+    Route::post('/store',           [PostController::class,'store'])->name('post.store');
+    Route::get('/edit/{id}',        [PostController::class,'edit'])->name('post.edit');
+    Route::post('/update/{id}',     [PostController::class,'update'])->name('post.update');
+    Route::get('/delete/{id}',      [PostController::class,'destroy'])->name('post.destroy');
  });

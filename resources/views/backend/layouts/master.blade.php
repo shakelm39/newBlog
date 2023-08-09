@@ -25,7 +25,9 @@
     <link href="{{asset('backend/admin')}}/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="{{asset('backend/admin')}}/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
+    <!-- ckEditor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
+    
     <!-- Custom Theme Style -->
     <link href="{{asset('backend/admin')}}/build/css/custom.min.css" rel="stylesheet">
   </head>

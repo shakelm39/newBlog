@@ -49,5 +49,15 @@
     <!-- Custom Theme Scripts -->
     <script src="{{asset('backend/admin')}}/build/js/custom.min.js"></script>
 	
+
+<!-- ck editor -->
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+
   </body>
 </html>

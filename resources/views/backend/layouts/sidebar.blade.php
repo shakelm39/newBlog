@@ -12,8 +12,8 @@
         </li>
         <li><a><i class="fa fa-clone"></i>Post <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-                <li><a href="#">Add Post</a></li>
-                <li><a href="#">View Post</a></li>
+                <li><a href="{{route('post.create')}}">Add Post</a></li>
+                <li><a href="{{route('post.view')}}">View Post</a></li>
             </ul>
         </li>
     </ul>
