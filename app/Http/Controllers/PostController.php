@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +17,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = Post::latest()->get();
-        return view('backend.post.view_post',['post'=>$post]);
+        $posts = Post::all();
+        
+        return view('backend.post.view_post',compact('posts'));
     }
 
     /**
@@ -27,7 +29,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('backend.post.add_post');
+        $categories = Category::latest()->get();
+        return view('backend.post.add_post',compact('categories'));
     }
 
     /**
@@ -42,9 +45,11 @@ class PostController extends Controller
                 'title'=>['required','string','max:255'],
                 'subTitle'=>['required','string','max:255'],
                 'content'=>['required'],
+                'category_id'=>['required']
             ]);
 
             Post::create([
+            'category_id'=>$request->category_id,
             'title'=>$request->title,
             'subTitle'=>$request->subTitle,
             'content'=>$request->content,
@@ -53,7 +58,7 @@ class PostController extends Controller
         ]);
         
 
-         return redirect()->back()->with('success','Post has been created!!');
+         return redirect()->back()->with('success','Post has been Created!!');
     }
 
     /**
@@ -75,7 +80,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post       = Post::with('category')->find($id);
+        $categories = Category::all();
+        
+        return view('backend.post.edit_post',['post'=>$post,'categories'=>$categories]);
     }
 
     /**
@@ -87,7 +95,26 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post       = Post::with('category')->find($id);
+            $request->validate([
+                'title'=>['required','string','max:255'],
+                'subTitle'=>['required','string','max:255'],
+                'content'=>['required'],
+                'category_id'=>['required']
+            ]);
+
+            $post->update([
+            'category_id'=>$request->category_id,
+            'title'=>$request->title,
+            'subTitle'=>$request->subTitle,
+            'content'=>$request->content,
+            'slug'=>Str::Slug($request->title),
+            'published'=>$request->published,
+            'user_id'=>Auth::user()->id
+        ]);
+        
+
+        return redirect()->route('post.view')->with('success','Post has been Updated!!');
     }
 
     /**
@@ -98,6 +125,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post       = Post::with('category')->find($id);
+        $post->delete();
+        return redirect()->back()->with('success','Post has been Deleted!!');
     }
 }

@@ -12,8 +12,17 @@ class Post extends Model
         'user_id',
         'title',
         'subTitle',
+        'category_id',
         'slug',
         'content',
         'published'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
 }

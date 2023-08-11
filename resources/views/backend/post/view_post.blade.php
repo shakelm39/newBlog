@@ -19,28 +19,44 @@
                                         <thead>
                                             <tr>
                                                 <th>Sl</th>
-                                                <th>User Name</th>
+                                                <th>Category</th>
                                                 <th>Title</th>
                                                 <th>Sub Title</th>
                                                 <th>Slug</th>
                                                 <th>Content</th>
+                                                <th>Status</th>
+                                                <th>Created_By</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 											
-											@foreach($post as $key => $posts)
+											@foreach($posts as $key=> $post)
                                             <tr>
                                                 <td>{{$key+1}}</td>
-                                                <td>{{$posts->user->name}}</td>
-                                                <td>{{$posts->title}}</td>
-                                                <td>{{$posts->subTitle}}</td>
-                                                <td>{{$posts->slug}}</td>
-                                                <td>{{$posts->content}}</td>
+                                                <td>{{$post->category->title}}</td>
+                                                <td>{{$post->title}}</td>
+                                                <td>{{$post->subTitle}}</td>
+                                                <td>{{$post->slug}}</td>
+                                                <td>{!!$post->content!!}</td>
                                                 <td>
-                                                    <a href="{{route('post.edit',$posts->id)}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
-                                                    <a href="{{route('post.destroy',$posts->id)}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this data?')"><i class="fa fa-trash"></i></a>
+                                                    @if($post->published==0)
+                                                    <span class="badge bg-warning">{{'Pending'}}</span>
+                                                    @else
+                                                    <span class="badge bg-success text-white">{{'Published'}}</span>
+                                                    @endif
                                                 </td>
+                                                <td>
+                                                    {{Auth::user()->name}}<br>
+                                                    {{$post->created_at}}
+
+                                                </td>
+                                                <td width="10%">
+                                                    <a href="{{route('post.edit',$post->id)}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
+                                                    <a href="{{route('post.destroy',$post->id)}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure want to delete this data?')"><i class="fa fa-trash"></i></a>
+                                                </td>
+                                                
+                                                
                                             </tr>
 											
 											@endforeach

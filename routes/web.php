@@ -4,10 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FrontendController;
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -17,12 +16,13 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-//frontend 
-Route::get('/', function () {
-    return view('frontend.layouts.index');
-});
+// --------------------------------Frontend Controller ----------------------------------------------------//
 
-//backend
+    Route::get('/',[FrontendController::class, 'index' ])->name('frontend.index');
+    Route::get('/allpost/{id}',[FrontendController::class, 'show' ])->name('allPost.show');
+    Route::get('/singlepost/{id}',[FrontendController::class, 'singlePost' ])->name('single.post');
+
+// --------------------------------Backend Controller ----------------------------------------------------//
 Route::get('/dashboard', function () {
     return view('backend.layouts.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -48,3 +48,4 @@ Route::get('/dashboard', function () {
     Route::post('/update/{id}',     [PostController::class,'update'])->name('post.update');
     Route::get('/delete/{id}',      [PostController::class,'destroy'])->name('post.destroy');
  });
+

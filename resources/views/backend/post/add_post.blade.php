@@ -38,6 +38,18 @@
                                             </div>
                                         </div>
                                         <div class="item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="subTitle"> Category <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                <select name="category_id" class="form-control">
+                                                    <option value="">Select Category</option>
+                                                    @foreach($categories as $category)
+                                                    <option value="{{$category->id}}">{{$category->title}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="content">Content <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 ">
