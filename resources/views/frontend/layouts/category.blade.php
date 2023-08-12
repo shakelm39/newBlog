@@ -14,7 +14,7 @@
 						@if( $post->published==1)
 						<div class="blog-entry d-flex blog-entry-search-item">
 							<a href="{{route('single.post',$post->id)}}" class="img-link me-4">
-								<img src="{{asset('frontend/user')}}/images/img_1_sq.jpg" alt="Image" class="img-fluid">
+								<img src="{{asset('uploads/post/images/'.$post->img)}}" alt="Image" class="img-fluid">
 							</a>
 							<div>
 								<span class="date">{{$post->created_at->format('d-M,Y')}} &bullet; <a href="#">{{$allPost->title}}</a></span>
@@ -59,7 +59,7 @@
 								@foreach ($posts as $post)
 								<li>
 									<a href="{{route('single.post',$post->id)}}">
-										<img src="{{asset('frontend/user')}}/images/img_1_sq.jpg" alt="Image placeholder" class="me-4 rounded">
+										<img src="{{asset('uploads/post/images/'.$post->img)}}" alt="Image placeholder" class="me-4 rounded">
 										<div class="text">
 											<h4>{!!Str::limit($post->content,60)!!}</h4>
 											<div class="post-meta">

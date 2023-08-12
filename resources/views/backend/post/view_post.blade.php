@@ -24,6 +24,7 @@
                                                 <th>Sub Title</th>
                                                 <th>Slug</th>
                                                 <th>Content</th>
+                                                <th>Image</th>
                                                 <th>Status</th>
                                                 <th>Created_By</th>
                                                 <th>Action</th>
@@ -39,6 +40,9 @@
                                                 <td>{{$post->subTitle}}</td>
                                                 <td>{{$post->slug}}</td>
                                                 <td>{!!$post->content!!}</td>
+                                                <td >
+                                                    <img src="{{asset('uploads/post/images/'.$post->img)}}" alt="" width="120" height="80">
+                                                </td>
                                                 <td>
                                                     @if($post->published==0)
                                                     <span class="badge bg-warning">{{'Pending'}}</span>

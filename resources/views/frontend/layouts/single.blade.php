@@ -8,8 +8,8 @@
           <div class="post-entry text-center">
             <h1 class="mb-4">{{$singlePost->title}}</h1>
             <div class="post-meta align-items-center text-center">
-              <figure class="author-figure mb-0 me-3 d-inline-block"><img src="{{asset('frontend/user')}}/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
-              <span class="d-inline-block mt-1">By {{Auth::user()->name}}</span>
+              <figure class="author-figure mb-0 me-3 d-inline-block"><img src="{{asset('uploads/images/'.$singlePost->user->image)}}" alt="Image" class="img-fluid"></figure>
+              <span class="d-inline-block mt-1">By {{$singlePost->user->name}}</span>
               <span>&nbsp;-&nbsp; {{$singlePost->created_at->format('F j, Y')}}</span>
             </div>
           </div>
@@ -26,19 +26,19 @@
         <div class="col-md-12 col-lg-8 main-content">
 
           <div class="post-content-body">
-            <p>{!!$singlePost->content!!}</p>
+            <p>{{$singlePost->title}}</p>
             <div class="row my-4">
               <div class="col-md-12 mb-4">
-                <img src="{{asset('frontend/user')}}/images/hero_1.jpg" alt="Image placeholder" class="img-fluid rounded">
+                <img src="{{asset('uploads/post/images/'.$singlePost->img)}}" alt="Image placeholder" class="img-fluid  rounded">
               </div>
               <div class="col-md-6 mb-4">
-                <img src="{{asset('frontend/user')}}/images/img_2_horizontal.jpg" alt="Image placeholder" class="img-fluid rounded">
+                <img src="{{asset('uploads/post/images/'.$singlePost->img)}}" alt="Image placeholder" class="img-fluid rounded ">
               </div>
               <div class="col-md-6 mb-4">
-                <img src="{{asset('frontend/user')}}/images/img_3_horizontal.jpg" alt="Image placeholder" class="img-fluid rounded">
+                <img src="{{asset('uploads/post/images/'.$singlePost->img)}}" alt="Image placeholder" class="img-fluid rounded ">
               </div>
             </div>
-            
+            <p>{!!$singlePost->content!!}</p>
           </div>
 
 
@@ -173,9 +173,9 @@
           <!-- END sidebar-box -->
           <div class="sidebar-box">
             <div class="bio text-center">
-              <img src="{{asset('frontend/user')}}/images/person_1.jpg" alt="Image Placeholder" class="img-fluid mb-3">
+              <img src="{{asset('uploads/images/'.$singlePost->user->image)}}" alt="Image Placeholder" class="img-fluid mb-3">
               <div class="bio-body">
-                <h2>{{Auth::user()->name}}</h2>
+                <h2>{{$singlePost->user->name}}</h2>
                 <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem facilis sunt repellendus excepturi beatae porro debitis voluptate nulla quo veniam fuga sit molestias minus.</p>
                 <p><a href="#" class="btn btn-primary btn-sm rounded px-2 py-2">Read my bio</a></p>
                 <p class="social">
@@ -196,7 +196,7 @@
                 @foreach ($posts as $post)
                 <li>
                   <a href="{{route('single.post',$post->id)}}">
-                    <img src="{{asset('frontend/user')}}/images/img_1_sq.jpg" alt="Image placeholder" class="me-4 rounded">
+                    <img src="{{asset('uploads/post/images/'.$post->img)}}" alt="Image placeholder" class="me-4 rounded">
                     <div class="text">
                       <h4>{!!Str::limit($post->content,60)!!}</h4>
                       <div class="post-meta">
@@ -259,50 +259,22 @@
         <div class="col-12 text-uppercase text-black">More Blog Posts</div>
       </div>
       <div class="row">
+        @foreach ($posts as $key=> $post)
+        @if($key <4)
         <div class="col-md-6 col-lg-3">
           <div class="blog-entry">
-            <a href="single.html" class="img-link">
-              <img src="{{asset('frontend/user')}}/images/img_1_horizontal.jpg" alt="Image" class="img-fluid">
+            <a href="{{route('single.post',$post->id)}}" class="img-link">
+              <img src="{{asset('uploads/post/images/'.$post->img)}}" alt="Image" class="img-fluid img-small">
             </a>
-            <span class="date">Apr. 14th, 2022</span>
-            <h2><a href="single.html">Thought you loved Python? Wait until you meet Rust</a></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            <p><a href="#" class="read-more">Continue Reading</a></p>
+            <span class="date">{{$post->created_at->format('F j ,Y')}}</span>
+            <h2><a href="{{route('single.post',$post->id)}}">{{$post->title}}</a></h2>
+            <p>{!!$post->content!!}</p>
+            <p><a href="{{route('single.post',$post->id)}}" class="read-more">Continue Reading</a></p>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="blog-entry">
-            <a href="single.html" class="img-link">
-              <img src="{{asset('frontend/user')}}/images/img_2_horizontal.jpg" alt="Image" class="img-fluid">
-            </a>
-            <span class="date">Apr. 14th, 2022</span>
-            <h2><a href="single.html">Startup vs corporate: What job suits you best?</a></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            <p><a href="#" class="read-more">Continue Reading</a></p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="blog-entry">
-            <a href="single.html" class="img-link">
-              <img src="{{asset('frontend/user')}}/images/img_3_horizontal.jpg" alt="Image" class="img-fluid">
-            </a>
-            <span class="date">Apr. 14th, 2022</span>
-            <h2><a href="single.html">UK sees highest inflation in 30 years</a></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            <p><a href="#" class="read-more">Continue Reading</a></p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="blog-entry">
-            <a href="single.html" class="img-link">
-              <img src="{{asset('frontend/user')}}/images/img_4_horizontal.jpg" alt="Image" class="img-fluid">
-            </a>
-            <span class="date">Apr. 14th, 2022</span>
-            <h2><a href="single.html">Don’t assume your user data in the cloud is safe</a></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            <p><a href="#" class="read-more">Continue Reading</a></p>
-          </div>
-        </div>
+        @endif
+        @endforeach
+        
       </div>
     </div>
   </section>

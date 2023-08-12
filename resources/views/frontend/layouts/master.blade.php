@@ -22,9 +22,10 @@
 	<link rel="stylesheet" href="{{asset('frontend/user')}}/css/tiny-slider.css">
 	<link rel="stylesheet" href="{{asset('frontend/user')}}/css/aos.css">
 	<link rel="stylesheet" href="{{asset('frontend/user')}}/css/glightbox.min.css">
+	<link rel="stylesheet" href="{{asset('frontend/user')}}/css/flatpickr.min.css">
 	<link rel="stylesheet" href="{{asset('frontend/user')}}/css/style.css">
 
-	<link rel="stylesheet" href="{{asset('frontend/user')}}/css/flatpickr.min.css">
+	
 
 
 	<title>New &mdash; Blog</title>
@@ -60,7 +61,7 @@
 									<a href="category.html">Pages</a>
 									<ul class="dropdown">
 										<li><a href="search-result.html">Search Result</a></li>
-										<li><a href="blog.html">Blog</a></li>
+										<li><a href="{{route('blog.show')}}">Blog</a></li>
 										<li><a href="single.html">Blog Single</a></li>
 										<li><a href="category.html">Category</a></li>
 										<li><a href="about.html">About</a></li>

@@ -18,8 +18,9 @@
                                         <div class="alert alert-success">{{session('success')}}</div>
                                     @endif
 									<br />
-									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{{route('post.update',$post->id)}}" method="post">
+									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{{route('post.update')}}" method="post" enctype="multipart/form-data">
                                         @csrf
+                                        <input type="hidden" name="id" value="{{ $post->id}}"
                                         <div class="item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="category_id"> Category <span class="required">*</span>
                                             </label>
@@ -52,9 +53,18 @@
                                         <div class="item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="content">Content <span class="required">*</span>
                                             </label>
-                                            <div class="col-md-6 col-sm-6 ">
-                                                <textarea name="content" cols="30" rows="10" id="editor">{{$post->content}}</textarea>
+                                            <div class="col-md-6 col-sm-6">
+                                                <textarea name="content" cols="80" rows="10" id="editor">{{$post->content}}</textarea>
                                                 <span class="text-danger"><strong>@error('content'){{$message}}@enderror</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="content">Image <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                            <img src="{{asset('uploads/post/images/'.$post->img)}}"  alt="" width="120" height="80" ><br><br>
+                                                <input type="file" name="img" {{asset('uploads/post/images/'.$post->img) ? 'slected' :''}}>
+                                                <span class="text-danger"><strong>@error('img'){{$message}}@enderror</strong></span>
                                             </div>
                                         </div>
                                         <div class="item form-group">
@@ -85,7 +95,21 @@
 			</div>
 			<!-- /page content -->
 
-
+            <script>
+            function previewFile(input){
+                var file = $("input[type=file]").get(0).files[0];
+        
+                if(file){
+                    var reader = new FileReader();
+        
+                    reader.onload = function(){
+                        $("#previewImg").attr("src", reader.result);
+                    }
+        
+                    reader.readAsDataURL(file);
+                }
+            }
+        </script>
 
 @endsection
 

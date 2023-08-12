@@ -39,7 +39,11 @@ class ProfileController extends Controller
                 
             $fileName = time().'.'.$file->getClientOriginalExtension(); 
             $destinationPath = 'uploads/images';
-            $file->move($destinationPath,$fileName);
+            
+            if(file_exists('uploads/images/'.$user->image)){
+                unlink('uploads/images/'.$user->image);
+              }
+              $file->move($destinationPath,$fileName);
             $user->image = $fileName;
         }
 

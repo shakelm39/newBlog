@@ -21,6 +21,7 @@ require __DIR__.'/auth.php';
     Route::get('/',[FrontendController::class, 'index' ])->name('frontend.index');
     Route::get('/allpost/{id}',[FrontendController::class, 'show' ])->name('allPost.show');
     Route::get('/singlepost/{id}',[FrontendController::class, 'singlePost' ])->name('single.post');
+    Route::get('/blog/post',[FrontendController::class, 'blogpost' ])->name('blog.show');
 
 // --------------------------------Backend Controller ----------------------------------------------------//
 Route::get('/dashboard', function () {
@@ -45,7 +46,7 @@ Route::get('/dashboard', function () {
     Route::get('/addPost',          [PostController::class,'create'])->name('post.create');
     Route::post('/store',           [PostController::class,'store'])->name('post.store');
     Route::get('/edit/{id}',        [PostController::class,'edit'])->name('post.edit');
-    Route::post('/update/{id}',     [PostController::class,'update'])->name('post.update');
+    Route::post('/update',          [PostController::class,'update'])->name('post.update');
     Route::get('/delete/{id}',      [PostController::class,'destroy'])->name('post.destroy');
  });
 

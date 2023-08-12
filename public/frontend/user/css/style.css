@@ -10503,3 +10503,13 @@ textarea {
       .site-footer .social li a:hover {
         background: #fff;
         color: #214252; }
+
+        .custom-img{
+          width: 450px;
+          height: 400px;
+          overflow: hidden;
+        }
+        .img-small{
+          width: 300px;
+          height: 200px;
+        }

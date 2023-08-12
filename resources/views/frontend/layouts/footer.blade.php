@@ -44,39 +44,22 @@
 						<h3 class="mb-4">Recent Post Entry</h3>
 						<div class="post-entry-footer">
 							<ul>
+								@foreach ($posts as $key=> $post)
+								@if($key<3)
 								<li>
-									<a href="">
-										<img src="{{asset('frontend/user')}}/images/img_1_sq.jpg" alt="Image placeholder" class="me-4 rounded">
+									<a href="{{route('single.post',$post->id)}}">
+										<img src="{{asset('uploads/post/images/'.$post->img)}}" alt="Image placeholder" class="me-4 rounded">
 										<div class="text">
-											<h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
+											<h4>{{$post->title}}</h4>
 											<div class="post-meta">
-												<span class="mr-2">March 15, 2018 </span>
+												<span class="mr-2">{{$post->created_at->format('F j , Y')}} </span>
 											</div>
 										</div>
 									</a>
 								</li>
-								<li>
-									<a href="">
-										<img src="{{asset('frontend/user')}}/images/img_2_sq.jpg" alt="Image placeholder" class="me-4 rounded">
-										<div class="text">
-											<h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-											<div class="post-meta">
-												<span class="mr-2">March 15, 2018 </span>
-											</div>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="">
-										<img src="{{asset('frontend/user')}}/images/img_3_sq.jpg" alt="Image placeholder" class="me-4 rounded">
-										<div class="text">
-											<h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-											<div class="post-meta">
-												<span class="mr-2">March 15, 2018 </span>
-											</div>
-										</div>
-									</a>
-								</li>
+								@endif
+								@endforeach
+								
 							</ul>
 						</div>
 

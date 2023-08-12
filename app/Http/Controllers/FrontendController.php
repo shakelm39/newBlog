@@ -16,8 +16,8 @@ class FrontendController extends Controller
     public function index()
     {
         $categories = Category::with('posts')->get();
-       
-        return view('frontend.layouts.index',compact('categories'));
+        $posts = Post::orderBy('created_at', 'desc')->take(5)->get();
+        return view('frontend.layouts.index',compact('categories','posts'));
     }
 
     /**
@@ -61,7 +61,7 @@ class FrontendController extends Controller
 
     public function singlePost($id){
        
-        $singlePost = Post::with('category')->find($id);
+        $singlePost = Post::with('category','user')->find($id);
         $categories = Category::with('posts')->get();
         $posts = Post::orderBy('created_at', 'desc')->take(5)->get();
         return view('frontend.layouts.single',compact('singlePost','categories','posts'));
@@ -98,5 +98,11 @@ class FrontendController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function blogpost(){
+        $categories = Category::with('posts')->latest()->where('title','Blogging')->get();
+        $posts = Post::orderBy('created_at', 'desc')->take(5)->get(); 
+        return view('frontend.layouts.blog',compact('categories','posts'));
     }
 }

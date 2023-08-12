@@ -41,22 +41,40 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-            $request->validate([
+        
+        
+        $request->validate([
                 'title'=>['required','string','max:255'],
                 'subTitle'=>['required','string','max:255'],
                 'content'=>['required'],
+                'img'=>['required'],
                 'category_id'=>['required']
             ]);
+           
 
-            Post::create([
-            'category_id'=>$request->category_id,
-            'title'=>$request->title,
-            'subTitle'=>$request->subTitle,
-            'content'=>$request->content,
-            'slug'=>Str::Slug($request->title),
-            'user_id'=>Auth::user()->id
-        ]);
-        
+            $post = new Post;
+
+            $post->category_id  = $request->category_id;
+            $post->title        = $request->title;
+            $post->subTitle     = $request->subTitle;
+            $post->content      = $request->content;
+            $post->slug         = Str::Slug($request->title);
+            $post->user_id      = Auth::user()->id;
+            
+            if( $file = $request->file('img')){
+                
+                    $fileName = time().'.'.$file->getClientOriginalExtension(); 
+                    $destinationPath = 'uploads/post/images';
+                    
+                      $file->move($destinationPath,$fileName);
+
+                      $post->img = $fileName; 
+                      
+                      
+                }
+             
+              $post->save();
+
 
          return redirect()->back()->with('success','Post has been Created!!');
     }
@@ -93,25 +111,44 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $post       = Post::with('category')->find($id);
+       
             $request->validate([
                 'title'=>['required','string','max:255'],
                 'subTitle'=>['required','string','max:255'],
                 'content'=>['required'],
+                'img'=>[$request->id != null ? 'nullable' : 'required'],
                 'category_id'=>['required']
             ]);
+            $post       = Post::with('category')->find($request->id);
 
-            $post->update([
-            'category_id'=>$request->category_id,
-            'title'=>$request->title,
-            'subTitle'=>$request->subTitle,
-            'content'=>$request->content,
-            'slug'=>Str::Slug($request->title),
-            'published'=>$request->published,
-            'user_id'=>Auth::user()->id
-        ]);
+            $post->category_id  = $request->category_id;
+            $post->title        = $request->title;
+            $post->subTitle     = $request->subTitle;
+            $post->content      = $request->content;
+            $post->published      = $request->published;
+            $post->slug         = Str::Slug($request->title);
+            $post->user_id      = Auth::user()->id;
+            
+            if( $file = $request->file('img')){
+                
+                    $fileName = time().'.'.$file->getClientOriginalExtension(); 
+                    $destinationPath = 'uploads/post/images';
+
+                    // if(file_exists('uploads/post/images/'.$post->img)){
+                    //     unlink('uploads/post/images/'.$post->img);
+                    //   }else{
+                        
+                    //   }
+                      $file->move($destinationPath,$fileName);
+
+                      $post->img = $fileName; 
+                      
+                      
+                }
+             
+              $post->update();
         
 
         return redirect()->route('post.view')->with('success','Post has been Updated!!');

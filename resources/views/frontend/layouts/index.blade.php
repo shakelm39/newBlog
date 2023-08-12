@@ -81,7 +81,7 @@
 								<div class="col-md-6">
 									<div class="blog-entry">
 										<a href="{{route('single.post',$post->id)}}" class="img-link">
-											<img src="{{asset('frontend/user')}}/images/img_1_sq.jpg" alt="Image" class="img-fluid">
+											<img src="{{asset('uploads/post/images/'.$post->img)}}" alt="Image" class="img-fluid custom-img">
 										</a>
 										<span class="date">{{$post->created_at->format('d-M,Y')}}</span>
 										<h2><a href="{{route('single.post',$post->id)}}">{{$post->title}}</a></h2>
@@ -94,7 +94,7 @@
 								<div class="col-md-6 col-lg-3">
 									<div class="blog-entry">
 										<a href="{{route('single.post',$post->id)}}" class="img-link">
-											<img src="{{asset('frontend/user')}}/images/img_3_horizontal.jpg" alt="Image" class="img-fluid">
+											<img src="{{asset('uploads/post/images/'.$post->img)}}" alt="Image" class="img-fluid img-small">
 										</a>
 										<span class="date">{{$post->created_at->format('d-M,Y')}}</span>
 										<h2><a href="{{route('single.post',$post->id)}}">{{$post->title}}</a></h2>

@@ -13,7 +13,7 @@
         @csrf
     </form>
     <div>
-        <img src="uploads/images/{{Session::get('file') }}" alt="" style="width:80px; height:80px; border:2px solid;">
+        <img src="{{'uploads/images/'.$user->image}}" alt="" style="width:80px; height:80px; border:2px solid;">
     </div>
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf

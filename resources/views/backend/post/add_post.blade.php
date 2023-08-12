@@ -18,7 +18,7 @@
                                         <div class="alert alert-success">{{session('success')}}</div>
                                     @endif
 									<br />
-									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{{route('post.store')}}" method="post">
+									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{{route('post.store')}}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         <div class="item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="title">Title <span class="required">*</span>
@@ -56,6 +56,11 @@
                                                 <textarea name="content" cols="30" rows="10" id="editor"></textarea>
                                                 <span class="text-danger"><strong>@error('content'){{$message}}@enderror</strong></span>
                                             </div>
+                                        </div> 
+                                        <div class="item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="img">Image <span class="required">*</span>
+                                            </label>
+                                            <input type="file" class="col-md-6 col-sm-6" name="img">
                                         </div>
                                         
                                         <div class="ln_solid"></div>

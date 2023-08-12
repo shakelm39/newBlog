@@ -16,65 +16,22 @@
       
       <div class="row posts-entry">
         <div class="col-lg-8">
+          @foreach ($categories as $category)
+          @foreach($category->posts as $post)
           <div class="blog-entry d-flex blog-entry-search-item">
-            <a href="single.html" class="img-link me-4">
-              <img src="{{asset('frontend/user')}}/images/img_1_sq.jpg" alt="Image" class="img-fluid">
+            <a href="{{route('single.post',$post->id)}}" class="img-link me-4">
+              <img src="{{asset('uploads/post/images/'.$post->img)}}" alt="Image" class="img-fluid img-small">
             </a>
             <div>
-              <span class="date">Apr. 14th, 2022 &bullet; <a href="#">Business</a></span>
-              <h2><a href="single.html">Thought you loved Python? Wait until you meet Rust</a></h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</p>
-              <p><a href="single.html" class="btn btn-sm btn-outline-primary">Read More</a></p>
+              <span class="date">Apr. 14th, 2022 &bullet; <a href="#">{{$category->title}}</a></span>
+              <h2><a href="{{route('single.post',$post->id)}}">{{$post->title}}</a></h2>
+              <p>{!!Str::limit($post->content,80)!!}</p>
+              <p><a href="{{route('single.post',$post->id)}}" class="btn btn-sm btn-outline-primary">Read More</a></p>
             </div>
           </div>
-
-          <div class="blog-entry d-flex blog-entry-search-item">
-            <a href="single.html" class="img-link me-4">
-              <img src="{{asset('frontend/user')}}/images/img_2_sq.jpg" alt="Image" class="img-fluid">
-            </a>
-            <div>
-              <span class="date">Apr. 14th, 2022 &bullet; <a href="#">Business</a></span>
-              <h2><a href="single.html">Thought you loved Python? Wait until you meet Rust</a></h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</p>
-              <p><a href="single.html" class="btn btn-sm btn-outline-primary">Read More</a></p>
-            </div>
-          </div>
-
-          <div class="blog-entry d-flex blog-entry-search-item">
-            <a href="single.html" class="img-link me-4">
-              <img src="{{asset('frontend/user')}}/images/img_3_sq.jpg" alt="Image" class="img-fluid">
-            </a>
-            <div>
-              <span class="date">Apr. 14th, 2022 &bullet; <a href="#">Business</a></span>
-              <h2><a href="single.html">Thought you loved Python? Wait until you meet Rust</a></h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</p>
-              <p><a href="single.html" class="btn btn-sm btn-outline-primary">Read More</a></p>
-            </div>
-          </div>
-
-          <div class="blog-entry d-flex blog-entry-search-item">
-            <a href="single.html" class="img-link me-4">
-              <img src="{{asset('frontend/user')}}/images/img_4_sq.jpg" alt="Image" class="img-fluid">
-            </a>
-            <div>
-              <span class="date">Apr. 14th, 2022 &bullet; <a href="#">Business</a></span>
-              <h2><a href="single.html">Thought you loved Python? Wait until you meet Rust</a></h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</p>
-              <p><a href="single.html" class="btn btn-sm btn-outline-primary">Read More</a></p>
-            </div>
-          </div>
-
-          <div class="blog-entry d-flex blog-entry-search-item">
-            <a href="single.html" class="img-link me-4">
-              <img src="{{asset('frontend/user')}}/images/img_5_sq.jpg" alt="Image" class="img-fluid">
-            </a>
-            <div>
-              <span class="date">Apr. 14th, 2022 &bullet; <a href="#">Business</a></span>
-              <h2><a href="single.html">Thought you loved Python? Wait until you meet Rust</a></h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</p>
-              <p><a href="single.html" class="btn btn-sm btn-outline-primary">Read More</a></p>
-            </div>
-          </div>
+          @endforeach
+          @endforeach
+         
 
           <div class="row text-start pt-5 border-top">
             <div class="col-md-12">
@@ -104,39 +61,19 @@
             <h3 class="heading">Popular Posts</h3>
             <div class="post-entry-sidebar">
               <ul>
+                @foreach ($posts as $post)
                 <li>
                   <a href="">
-                    <img src="{{asset('frontend/user')}}/images/img_1_sq.jpg" alt="Image placeholder" class="me-4 rounded">
+                    <img src="{{asset('uploads/post/images/'.$post->img)}}" alt="Image placeholder" class="me-4 rounded">
                     <div class="text">
-                      <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
+                      <h4>{{$post->title}}</h4>
                       <div class="post-meta">
-                        <span class="mr-2">March 15, 2018 </span>
+                        <span class="mr-2">{{$post->created_at->format('F j, Y')}} </span>
                       </div>
                     </div>
                   </a>
                 </li>
-                <li>
-                  <a href="">
-                    <img src="{{asset('frontend/user')}}/images/img_2_sq.jpg" alt="Image placeholder" class="me-4 rounded">
-                    <div class="text">
-                      <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                      <div class="post-meta">
-                        <span class="mr-2">March 15, 2018 </span>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <img src="{{asset('frontend/user')}}/images/img_3_sq.jpg" alt="Image placeholder" class="me-4 rounded">
-                    <div class="text">
-                      <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                      <div class="post-meta">
-                        <span class="mr-2">March 15, 2018 </span>
-                      </div>
-                    </div>
-                  </a>
-                </li>
+                @endforeach
               </ul>
             </div>
           </div>
@@ -145,11 +82,15 @@
           <div class="sidebar-box">
             <h3 class="heading">Categories</h3>
             <ul class="categories">
-              <li><a href="#">Food <span>(12)</span></a></li>
-              <li><a href="#">Travel <span>(22)</span></a></li>
-              <li><a href="#">Lifestyle <span>(37)</span></a></li>
-              <li><a href="#">Business <span>(42)</span></a></li>
-              <li><a href="#">Adventure <span>(14)</span></a></li>
+              @foreach ($categories as $category)
+              <li><a href="#">{{$category->title}} 
+                <span>
+                  
+                  ({{count($category->posts)}})
+                
+              </span>
+            </a></li>
+              @endforeach
             </ul>
           </div>
           <!-- END sidebar-box -->
