@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FrontendController;
 
 
@@ -50,3 +51,12 @@ Route::get('/dashboard', function () {
     Route::get('/delete/{id}',      [PostController::class,'destroy'])->name('post.destroy');
  });
 
+// --------------------------------Post Comment Controller ----------------------------------------------------//
+
+Route::group(['prefix'=>'comment'], function(){
+    Route::get('/postComment',  [CommentController::class,'index'])->name('comment.index');
+    Route::post('/store',       [CommentController::class,'store'])->middleware(['auth', 'verified'])->name('comment.store');
+    Route::get('/edit/{id}',    [CommentController::class,'edit'])->name('comment.edit');
+    Route::post('/update',       [CommentController::class,'update'])->name('comment.update');
+    Route::get('/delete/{id}',  [CommentController::class,'destroy'])->name('comment.destroy');
+});

@@ -12,7 +12,14 @@ class PostComment extends Model
     protected $fillable = [
         'post_id',
         'user_id',
-        'title',
+        'comment',
         'published'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public function posts(){
+        return $this->belongsTo(Post::class);
+    }
 }

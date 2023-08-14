@@ -16,6 +16,11 @@
                 <li><a href="{{route('post.view')}}">View Post</a></li>
             </ul>
         </li>
+        <li><a><i class="fa fa-clone"></i>Comments <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+                <li><a href="{{route('comment.index')}}">View Comment</a></li>
+            </ul>
+        </li>
     </ul>
     </div>
 </div>

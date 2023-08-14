@@ -42,8 +42,8 @@ class ProfileController extends Controller
             
             if(file_exists('uploads/images/'.$user->image)){
                 unlink('uploads/images/'.$user->image);
-              }
-              $file->move($destinationPath,$fileName);
+            }
+            $file->move($destinationPath,$fileName);
             $user->image = $fileName;
         }
 

@@ -53,7 +53,7 @@
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="content">Content <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 ">
-                                                <textarea name="content" cols="30" rows="10" id="editor"></textarea>
+                                                <textarea name="content" class="form-control" cols="30" rows="10" id="editor"></textarea>
                                                 <span class="text-danger"><strong>@error('content'){{$message}}@enderror</strong></span>
                                             </div>
                                         </div> 

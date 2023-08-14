@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Post;
+use App\Models\Category;
+use App\Models\PostComment;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -64,7 +65,11 @@ class FrontendController extends Controller
         $singlePost = Post::with('category','user')->find($id);
         $categories = Category::with('posts')->get();
         $posts = Post::orderBy('created_at', 'desc')->take(5)->get();
-        return view('frontend.layouts.single',compact('singlePost','categories','posts'));
+        $postComment = PostComment::where('post_id', $id)->get();
+
+
+
+        return view('frontend.layouts.single',compact('singlePost','categories','posts','postComment'));
     }
     /**
      * Show the form for editing the specified resource.

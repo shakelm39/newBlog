@@ -123,13 +123,13 @@ class PostController extends Controller
             ]);
             $post       = Post::with('category')->find($request->id);
 
-            $post->category_id  = $request->category_id;
-            $post->title        = $request->title;
-            $post->subTitle     = $request->subTitle;
-            $post->content      = $request->content;
-            $post->published      = $request->published;
-            $post->slug         = Str::Slug($request->title);
-            $post->user_id      = Auth::user()->id;
+                $post->category_id  = $request->category_id;
+                $post->title        = $request->title;
+                $post->subTitle     = $request->subTitle;
+                $post->content      = $request->content;
+                $post->published      = $request->published;
+                $post->slug         = Str::Slug($request->title);
+                $post->user_id      = Auth::user()->id;
             
             if( $file = $request->file('img')){
                 
